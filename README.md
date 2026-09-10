@@ -41,9 +41,9 @@ numeración, proteger/desbloquear con contraseña y reparar PDFs dañados.
 - Editor visual para escribir directamente sobre el PDF.
 - Firma electrónica simple (dibujar/subir firma y colocarla en el PDF).
 
-## Uso de codigo abierto: 
+## Uso de código abierto: 
 
-- Puedes robarme el codigo para mejorarlo o montar tu herramienta propia en base a mi codigo.
+- Puedes robarme el código para mejorarlo o montar tu herramienta propia.
 - Si quieres hacer una pull request o tienes ideas de mejora contactame al:
 - discord: _destrozaabuelas
 > (Si demoro en contestar es que soy un muerto en redes sociales) 
