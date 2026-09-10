@@ -23,7 +23,10 @@ os.makedirs(TMP_DIR, exist_ok=True)
 
 MAX_CONTENT_LENGTH = 100 * 1024 * 1024  # 100 MB por request
 
-app = Flask(__name__)
+TEMPLATES_DIR = os.path.join(BASE_DIR, "templates")
+STATIC_DIR = os.path.join(BASE_DIR, "static")
+
+app = Flask(__name__, template_folder=TEMPLATES_DIR, static_folder=STATIC_DIR)
 app.config["MAX_CONTENT_LENGTH"] = MAX_CONTENT_LENGTH
 
 
@@ -492,6 +495,26 @@ def api_repair():
 @app.route("/health")
 def health():
     return jsonify({"status": "ok"})
+
+
+@app.route("/debug-files")
+def debug_files():
+    """Endpoint temporal de diagnóstico: muestra qué archivos existen realmente
+    dentro del contenedor desplegado. Bórralo cuando confirmes que todo funciona."""
+    def list_dir(path):
+        if not os.path.isdir(path):
+            return f"NO EXISTE: {path}"
+        return os.listdir(path)
+
+    return jsonify({
+        "base_dir": BASE_DIR,
+        "cwd": os.getcwd(),
+        "templates_dir": TEMPLATES_DIR,
+        "templates_contents": list_dir(TEMPLATES_DIR),
+        "static_dir": STATIC_DIR,
+        "static_contents": list_dir(STATIC_DIR),
+        "base_dir_contents": list_dir(BASE_DIR),
+    })
 
 
 if __name__ == "__main__":

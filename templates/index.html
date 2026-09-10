@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>iHatePdf — Herramientas PDF gratis</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+
+<header class="topbar">
+  <div class="brand">📄 <span class="hate">iHate</span>Pdf</div>
+  <div class="tagline">Todas tus herramientas PDF, gratis y sin límites</div>
+</header>
+
+<main>
+  <section class="grid" id="tool-grid">
+
+    <div class="card" data-tool="merge">
+      <div class="icon">🧩</div>
+      <h3>Unir PDF</h3>
+      <p>Combina varios PDF en uno solo</p>
+    </div>
+
+    <div class="card" data-tool="split">
+      <div class="icon">✂️</div>
+      <h3>Dividir PDF</h3>
+      <p>Separa páginas o extrae rangos</p>
+    </div>
+
+    <div class="card" data-tool="compress">
+      <div class="icon">🗜️</div>
+      <h3>Comprimir PDF</h3>
+      <p>Reduce el tamaño del archivo</p>
+    </div>
+
+    <div class="card" data-tool="rotate">
+      <div class="icon">🔄</div>
+      <h3>Rotar PDF</h3>
+      <p>Gira las páginas del documento</p>
+    </div>
+
+    <div class="card" data-tool="pdf-to-jpg">
+      <div class="icon">🖼️</div>
+      <h3>PDF a JPG</h3>
+      <p>Convierte cada página en imagen</p>
+    </div>
+
+    <div class="card" data-tool="jpg-to-pdf">
+      <div class="icon">📷</div>
+      <h3>JPG/PNG a PDF</h3>
+      <p>Convierte imágenes en un PDF</p>
+    </div>
+
+    <div class="card" data-tool="pdf-to-word">
+      <div class="icon">📝</div>
+      <h3>PDF a Word</h3>
+      <p>Convierte tu PDF a .docx editable</p>
+    </div>
+
+    <div class="card" data-tool="word-to-pdf">
+      <div class="icon">📄</div>
+      <h3>Word a PDF</h3>
+      <p>Convierte documentos .docx a PDF</p>
+    </div>
+
+    <div class="card" data-tool="extract">
+      <div class="icon">📑</div>
+      <h3>Extraer páginas</h3>
+      <p>Guarda solo las páginas que elijas</p>
+    </div>
+
+    <div class="card" data-tool="remove-pages">
+      <div class="icon">🗑️</div>
+      <h3>Eliminar páginas</h3>
+      <p>Quita páginas específicas</p>
+    </div>
+
+    <div class="card" data-tool="watermark">
+      <div class="icon">💧</div>
+      <h3>Marca de agua</h3>
+      <p>Añade texto sobre tu documento</p>
+    </div>
+
+    <div class="card" data-tool="page-numbers">
+      <div class="icon">🔢</div>
+      <h3>Numerar páginas</h3>
+      <p>Agrega numeración automática</p>
+    </div>
+
+    <div class="card" data-tool="protect">
+      <div class="icon">🔒</div>
+      <h3>Proteger PDF</h3>
+      <p>Añade contraseña a tu PDF</p>
+    </div>
+
+    <div class="card" data-tool="unlock">
+      <div class="icon">🔓</div>
+      <h3>Desbloquear PDF</h3>
+      <p>Elimina la contraseña de tu PDF</p>
+    </div>
+
+    <div class="card" data-tool="repair">
+      <div class="icon">🛠️</div>
+      <h3>Reparar PDF</h3>
+      <p>Intenta arreglar un PDF dañado</p>
+    </div>
+
+  </section>
+</main>
+
+<!-- MODAL -->
+<div id="modal-overlay" class="modal-overlay hidden">
+  <div class="modal">
+    <button id="modal-close" class="modal-close">✕</button>
+    <h2 id="modal-title">Herramienta</h2>
+    <div id="modal-body"></div>
+    <div id="modal-status"></div>
+  </div>
+</div>
+
+<footer>
+  <p>iHatePdf — proyecto de código abierto. Procesamiento temporal, tus archivos se borran después de cada descarga.</p>
+</footer>
+
+<script src="{{ url_for('static', filename='script.js') }}"></script>
+</body>
+</html>
