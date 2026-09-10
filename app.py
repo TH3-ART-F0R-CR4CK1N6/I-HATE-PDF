@@ -7,6 +7,7 @@ import subprocess
 import tempfile
 
 from flask import Flask, request, render_template, send_file, jsonify, after_this_request
+from keepalive import start_keep_alive
 
 from pypdf import PdfReader, PdfWriter
 import pikepdf
@@ -518,5 +519,8 @@ def debug_files():
 
 
 if __name__ == "__main__":
+    # Iniciar keep-alive thread
+    start_keep_alive()
+    
     port = int(os.environ.get("PORT", 10000))
     app.run(host="0.0.0.0", port=port, debug=False)
