@@ -47,3 +47,5 @@ numeración, proteger/desbloquear con contraseña y reparar PDFs dañados.
 - Si quieres hacer una pull request o tienes ideas de mejora contactame al:
 - discord: _destrozaabuelas
 > (Si demoro en contestar es que soy un muerto en redes sociales) 
+
+Pagina para observar y probar el proyecto: https://i-hate-pdf-rfsk.onrender.com/
