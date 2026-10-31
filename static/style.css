@@ -209,3 +209,5 @@ footer {
 
 #modal-status.error { color: var(--accent); }
 #modal-status.success { color: #6fdc8c; }
+
+.editor-promo{display:flex;align-items:center;justify-content:space-between;gap:20px;background:linear-gradient(120deg,#242b3b,#3a2430);border:1px solid #5a3542;border-radius:16px;padding:22px 26px;margin:0 0 24px}.editor-promo strong{font-size:1.12rem;color:#fff}.editor-promo p{margin:6px 0 0;color:#c3c6d0;font-size:.9rem}.editor-promo a{white-space:nowrap;background:linear-gradient(90deg,var(--accent),var(--accent-2));padding:12px 17px;border-radius:9px;color:white;text-decoration:none;font-weight:700}@media(max-width:600px){.editor-promo{align-items:flex-start;flex-direction:column}.editor-promo a{white-space:normal}}

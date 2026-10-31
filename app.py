@@ -518,6 +518,9 @@ def debug_files():
     })
 
 
+from editor_routes import register_editor
+register_editor(app)
+
 if __name__ == "__main__":
     # Iniciar keep-alive thread
     start_keep_alive()

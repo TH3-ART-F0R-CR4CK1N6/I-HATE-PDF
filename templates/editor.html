@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Editor visual — iHatePdf</title>
+<link rel="stylesheet" href="{{ url_for('static', filename='editor.css') }}">
+</head>
+<body>
+<header class="editor-topbar">
+  <a class="brand" href="/">📄 iHatePdf</a><span>Editor visual de PDF</span>
+  <button id="download" class="primary" disabled>Descargar PDF</button>
+</header>
+<main class="editor-layout">
+  <aside class="sidebar">
+    <h2>Tu documento</h2>
+    <label class="upload" for="pdf-file">＋ Abrir archivo PDF</label><input id="pdf-file" type="file" accept="application/pdf,.pdf">
+    <p id="file-name" class="muted">Ningún archivo seleccionado</p>
+    <div id="thumbs" class="thumbs"><div class="empty">Carga un PDF para ver sus páginas aquí.</div></div>
+  </aside>
+  <section class="workspace">
+    <div class="toolbar">
+      <button id="rotate-left" disabled>↶ Girar</button><button id="rotate-right" disabled>↷ Girar</button>
+      <button id="delete-page" class="danger" disabled>Eliminar página</button>
+      <span class="separator"></span>
+      <button id="add-text" disabled>＋ Añadir texto</button>
+      <span id="page-counter" class="muted">Sin documento</span>
+    </div>
+    <div class="canvas-wrap" id="canvas-wrap">
+      <div class="welcome"><div class="welcome-icon">📑</div><h1>Edita tus PDF visualmente</h1><p>Organiza, gira, elimina páginas y añade texto sin complicaciones.</p><label class="primary" for="pdf-file">Seleccionar PDF</label></div>
+      <canvas id="page-canvas" hidden></canvas>
+      <div id="text-hint" class="hint" hidden>Haz clic en el documento para colocar el texto. <button id="cancel-text">Cancelar</button></div>
+    </div>
+  </section>
+</main>
+<div id="text-dialog" class="dialog" hidden><div class="dialog-card"><button id="close-dialog" class="close">×</button><h2>Añadir texto</h2><p>Escribe el texto y luego haz clic en el lugar donde quieres colocarlo.</p><input id="annotation-text" maxlength="180" placeholder="Escribe aquí..."><button id="place-text" class="primary">Elegir ubicación</button></div></div>
+<div id="toast" class="toast"></div>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
+<script src="{{ url_for('static', filename='editor.js') }}"></script>
+</body></html>
