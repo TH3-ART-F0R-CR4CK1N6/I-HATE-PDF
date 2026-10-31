@@ -1,39 +1,16 @@
 <!DOCTYPE html>
-<html lang="es">
-<head>
-<meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-<title>Editor visual — iHatePdf</title>
-<link rel="stylesheet" href="{{ url_for('static', filename='editor.css') }}">
-</head>
+<html lang="es"><head><meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>Editor PDF — iHatePdf</title><link rel="stylesheet" href="{{ url_for('static', filename='editor.css') }}"></head>
 <body>
-<header class="editor-topbar">
-  <a class="brand" href="/">📄 iHatePdf</a><span>Editor visual de PDF</span>
-  <button id="download" class="primary" disabled>Descargar PDF</button>
-</header>
-<main class="editor-layout">
-  <aside class="sidebar">
-    <h2>Tu documento</h2>
-    <label class="upload" for="pdf-file">＋ Abrir archivo PDF</label><input id="pdf-file" type="file" accept="application/pdf,.pdf">
-    <p id="file-name" class="muted">Ningún archivo seleccionado</p>
-    <div id="thumbs" class="thumbs"><div class="empty">Carga un PDF para ver sus páginas aquí.</div></div>
-  </aside>
-  <section class="workspace">
-    <div class="toolbar">
-      <button id="rotate-left" disabled>↶ Girar</button><button id="rotate-right" disabled>↷ Girar</button>
-      <button id="delete-page" class="danger" disabled>Eliminar página</button>
-      <span class="separator"></span>
-      <button id="add-text" disabled>＋ Añadir texto</button>
-      <span id="page-counter" class="muted">Sin documento</span>
-    </div>
-    <div class="canvas-wrap" id="canvas-wrap">
-      <div class="welcome"><div class="welcome-icon">📑</div><h1>Edita tus PDF visualmente</h1><p>Organiza, gira, elimina páginas y añade texto sin complicaciones.</p><label class="primary" for="pdf-file">Seleccionar PDF</label></div>
-      <canvas id="page-canvas" hidden></canvas>
-      <div id="text-hint" class="hint" hidden>Haz clic en el documento para colocar el texto. <button id="cancel-text">Cancelar</button></div>
-    </div>
-  </section>
-</main>
-<div id="text-dialog" class="dialog" hidden><div class="dialog-card"><button id="close-dialog" class="close">×</button><h2>Añadir texto</h2><p>Escribe el texto y luego haz clic en el lugar donde quieres colocarlo.</p><input id="annotation-text" maxlength="180" placeholder="Escribe aquí..."><button id="place-text" class="primary">Elegir ubicación</button></div></div>
+<header class="topbar"><a class="brand" href="/">📄 iHatePdf</a><div class="doc-title"><b>Editor PDF</b><small id="file-name">Sin documento abierto</small></div><div class="top-actions"><button id="undo" disabled>↶ Deshacer</button><button id="redo" disabled>↷ Rehacer</button><button id="download" class="primary" disabled>Descargar PDF</button></div></header>
+<main class="app">
+<aside class="pages-panel"><div class="panel-head"><b>Páginas</b><label class="upload-btn" for="pdf-file">＋ Abrir PDF</label><input id="pdf-file" type="file" accept="application/pdf,.pdf"></div><div id="thumbs" class="thumbs"><div class="empty">Abre un PDF para comenzar a editarlo.</div></div><div class="panel-foot"><button id="rotate-left" disabled>↶ Girar</button><button id="rotate-right" disabled>↷ Girar</button><button id="delete-page" class="danger" disabled>Eliminar</button></div></aside>
+<section class="editor">
+<div class="toolbars"><div class="tools" role="toolbar" aria-label="Herramientas de edición">
+<button class="tool active" data-tool="select" title="Seleccionar y mover">↖ <span>Seleccionar</span></button><button class="tool" data-tool="text" title="Añadir texto">T <span>Texto</span></button><button class="tool" data-tool="highlight" title="Resaltar">▰ <span>Resaltar</span></button><button class="tool" data-tool="pen" title="Dibujar o firmar">✎ <span>Firma / lápiz</span></button><button class="tool" data-tool="line" title="Línea">／ <span>Línea</span></button><button class="tool" data-tool="rect" title="Rectángulo">▱ <span>Rectángulo</span></button><button class="tool" data-tool="ellipse" title="Círculo / elipse">◯ <span>Elipse</span></button><button id="add-image" class="tool" title="Insertar imagen">▧ <span>Imagen</span></button><input id="image-file" type="file" accept="image/png,image/jpeg" hidden><button id="delete-annotation" class="tool danger" disabled title="Eliminar elemento seleccionado">⌫ <span>Eliminar</span></button>
+</div><div class="properties"><label>Color <input id="color" type="color" value="#e53950"></label><label>Grosor <input id="width" type="range" min="1" max="18" value="4"><span id="width-value">4</span></label><label>Opacidad <input id="opacity" type="range" min="10" max="100" value="42"><span id="opacity-value">42%</span></label><label class="text-size">Tamaño <input id="font-size" type="number" min="8" max="96" value="18"></label><button id="zoom-out" title="Alejar">−</button><span id="zoom-label">100%</span><button id="zoom-in" title="Acercar">＋</button></div></div>
+<div class="canvas-wrap" id="canvas-wrap"><div class="welcome"><div>📑</div><h1>Tu PDF, tus herramientas</h1><p>Firma, resalta, escribe, dibuja, inserta imágenes y organiza las páginas desde un solo lugar.</p><label for="pdf-file" class="primary">Seleccionar PDF</label></div><div id="page-stage" class="page-stage" hidden><canvas id="page-canvas"></canvas><canvas id="overlay"></canvas></div></div>
+<footer class="statusbar"><span id="page-counter">Sin documento</span><span>Los cambios se aplican al descargar el PDF</span><span id="selection-status">Herramienta: Seleccionar</span></footer>
+</section></main>
+<div id="text-dialog" class="modal" hidden><div class="modal-card"><button class="close" id="close-dialog">×</button><h2>Insertar texto</h2><p>Escribe el texto que quieres colocar en la página.</p><textarea id="annotation-text" maxlength="500" placeholder="Escribe aquí..."></textarea><div class="modal-actions"><button id="cancel-text">Cancelar</button><button id="place-text" class="primary">Colocar en página</button></div></div></div>
 <div id="toast" class="toast"></div>
-<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script>
-<script src="{{ url_for('static', filename='editor.js') }}"></script>
-</body></html>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/pdf.js/3.11.174/pdf.min.js"></script><script src="{{ url_for('static', filename='editor.js') }}"></script></body></html>
