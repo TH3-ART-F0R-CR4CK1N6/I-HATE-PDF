@@ -131,7 +131,10 @@ def register_editor(app):
                     _draw_annotations(page, op.get("annotations", []))
                 doc.save(output, garbage=4, deflate=True)
                 doc.close()
-                with open(output, "rb") as result_file:\n                    pdf_bytes = io.BytesIO(result_file.read())\n                pdf_bytes.seek(0)\n                return send_file(pdf_bytes, as_attachment=True, download_name="documento_editado.pdf", mimetype="application/pdf")
+                with open(output, "rb") as result_file:
+                    pdf_bytes = io.BytesIO(result_file.read())
+                pdf_bytes.seek(0)
+                return send_file(pdf_bytes, as_attachment=True, download_name="documento_editado.pdf", mimetype="application/pdf")
         except (ValueError, TypeError, json.JSONDecodeError) as exc:
             return jsonify({"error": "Los datos de edición no son válidos: " + str(exc)}), 400
         except Exception as exc:
